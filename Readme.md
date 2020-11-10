@@ -1,3 +1,4 @@
+
 最近叶老板写了个 FreeRedis，功能强悍，性能惊人，比子弹更快，比引擎更有力，刚好前段时间在学习 Redis，于是跟风试试也写一个简单的 RedisClient。
 
 FreeRedis 项目地址：[https://github.com/2881099/FreeRedis](https://github.com/2881099/FreeRedis)
@@ -18,7 +19,7 @@ Windows 版本的 **Redis** Desktop Manager 64位 2019.1(中文版) 下载地址
 
 
 
-### 1，关于 Redis RESP
+### 0，关于 Redis RESP
 
 **RESP** 全称 REdis Serialization Protocol ，即 Redis 序列化协议，用于协定客户端使用 socket 连接 Redis 时，数据的传输规则。
 
@@ -160,7 +161,7 @@ $9
 
 
 
-### 定义数据类型
+### 1，定义数据类型
 
 根据前面的 demo，我们来定义一个类型，存储那些特殊符号：
 
