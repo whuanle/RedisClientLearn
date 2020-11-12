@@ -6,6 +6,12 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="FreeRedis" Version="0.1.0" />
+    <PackageReference Include="NewLife.Redis" Version="3.8.2020.1101" />
+    <PackageReference Include="StackExchange.Redis" Version="2.1.58" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\..\src\CZGL.RedisClient\CZGL.RedisClient.csproj" />
   </ItemGroup>
 

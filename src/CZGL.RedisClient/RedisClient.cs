@@ -106,20 +106,24 @@ namespace CZGL.RedisClient
                 byte[] data = new byte[BufferSize];        // 分片，每次接收 N 个字节
 
                 int size = client.Receive(data);           // 等待接收一个消息
+                Console.WriteLine(size);
+                Console.WriteLine(System.Text.RegularExpressions.Regex.Escape(Encoding.UTF8.GetString(data)));
                 int length = size;                         // 数据流总长度
 
-                while (true)
-                {
-                    stream.Write(data, 0, size);            // 分片接收的数据流写入内存缓冲区
-
-                    // 数据流接收完毕
-                    if (size < BufferSize)      // 存在 Bug ，当数据流的大小或者数据流分片最后一片的字节大小刚刚好为 BufferSize 大小时，无法跳出 Receive
+                stream.Write(data, 0, size);               // 分片接收的数据流写入内存缓冲区
+                if (size >= BufferSize)
+                    while (true)
                     {
-                        break;
-                    }
+                        length += client.Receive(data);       // 还没有接收完毕，继续接收
 
-                    length += client.Receive(data);       // 还没有接收完毕，继续接收
-                }
+                        stream.Write(data, 0, size);            // 分片接收的数据流写入内存缓冲区
+
+                        // 数据流接收完毕
+                        if (size < BufferSize)      // 存在 Bug ，当数据流的大小或者数据流分片最后一片的字节大小刚刚好为 BufferSize 大小时，无法跳出 Receive
+                        {
+                            break;
+                        }
+                    }
 
                 stream.Seek(0, SeekOrigin.Begin);         // 重置游标位置
 
